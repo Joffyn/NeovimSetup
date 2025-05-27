@@ -1,9 +1,11 @@
 --Set spacebar to leader
 vim.g.mapleader = " "
 --NetRW with space-e
-vim.keymap.set("n", "<leader>e", function() 
-require("oil").open(vim.fn.getcwd())
-end)
+vim.keymap.set("n", "<leader>e", function () vim.cmd("Oil") end)
+--vim.keymap.set("n", "<leader>e", function() 
+--    local file_dir = vim.fn.expand("%:p:h")  
+--    require("oil").open(file_dir)
+--end)
 --Move highlighted stuff with ctrl-v/k
 vim.keymap.set("v", "K", ":m  '<-2<CR>gv=gv")
 vim.keymap.set("v", "J", ":m  '>+1<CR>gv=gv")
