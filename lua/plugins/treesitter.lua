@@ -6,7 +6,7 @@ return {
   config = function()
     require('nvim-treesitter.configs').setup({
       ensure_installed = {
-        "cpp", "c", "lua", "bash", "cmake", "json", "yaml", "python", "make", -- core languages
+        "cpp", "c", "lua", "bash", "cmake", "json", "yaml", "python", "make", "rust", "ron" -- core languages
         -- Unreal-specific (header files mostly fall under c/cpp)
       },
       highlight = {

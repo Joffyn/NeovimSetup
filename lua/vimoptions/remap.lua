@@ -2,6 +2,7 @@
 vim.g.mapleader = " "
 --NetRW with space-e
 vim.keymap.set("n", "<leader>e", function () vim.cmd("Oil") end)
+vim.keymap.set("i", "<C-H>", "<C-W>", {noremap = true})
 --vim.keymap.set("n", "<leader>e", function() 
 --    local file_dir = vim.fn.expand("%:p:h")  
 --    require("oil").open(file_dir)
@@ -9,6 +10,8 @@ vim.keymap.set("n", "<leader>e", function () vim.cmd("Oil") end)
 --Move highlighted stuff with ctrl-v/k
 vim.keymap.set("v", "K", ":m  '<-2<CR>gv=gv")
 vim.keymap.set("v", "J", ":m  '>+1<CR>gv=gv")
+--vim.keymap.set("t", "<leader>t", [["<C-\><C-n>]], { noremap = true, silent = true})
+
 
 
 --Function for swapping between header and cpp file
@@ -33,6 +36,34 @@ local function switch_source_header()
   end
 end
 vim.keymap.set("n", "<A-o>", switch_source_header, { desc = "Switch between header/source" })
+local bufnr = vim.api.nvim_get_current_buf()
+vim.keymap.set(
+  "n", 
+  "<leader>a", 
+  function()
+    vim.cmd.RustLsp('codeAction') -- supports rust-analyzer's grouping
+    -- or vim.lsp.buf.codeAction() if you don't want grouping.
+  end,
+  { silent = true, buffer = bufnr }
+)
+vim.keymap.set(
+  "n", 
+  "K",  -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
+  function()
+    vim.cmd.RustLsp({'hover', 'actions'})
+  end,
+  { silent = true, buffer = bufnr }
+)
+--vim.keymap.set
+--(
+--    "n",
+--    "<leader>t",
+--    function()
+--        --nvim_open_term()
+--    end,
+--
+--)
+
 
 
 
