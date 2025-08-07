@@ -21,6 +21,26 @@ vim.opt.smartindent = true
 vim.opt.scrolloff = 2
 
 
+--vim.diagnostic.config({float = { max_width = 10 }})
+
+-- Enable wrapping in all floating windows (including LSP hovers, signature help, etc.)
+--vim.api.nvim_create_autocmd("FileType", {
+--  pattern = "*",
+--  callback = function()
+--    vim.opt_local.wrap = true
+--  end
+--})
+
+-- Or target only diagnostics
+--vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+--  vim.lsp.handlers.hover,
+--  {
+--    border = "rounded",
+--    max_width = 80,
+--    wrap = true, -- doesn't exist directly, but wrap=true will be respected if 'wrap' is set in the buffer
+--  }
+--)
+
 
 
 
