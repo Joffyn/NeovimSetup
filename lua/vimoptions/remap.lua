@@ -11,6 +11,12 @@ vim.keymap.set("i", "<C-H>", "<C-W>", {noremap = true})
 vim.keymap.set("v", "K", ":m  '<-2<CR>gv=gv")
 vim.keymap.set("v", "J", ":m  '>+1<CR>gv=gv")
 --vim.keymap.set("t", "<leader>t", [["<C-\><C-n>]], { noremap = true, silent = true})
+-- Source - https://stackoverflow.com/a
+-- Posted by Brotify Force, modified by community. See post 'Timeline' for change history
+-- Retrieved 2025-11-19, License - CC BY-SA 4.0
+
+vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
 
 
 
