@@ -27,30 +27,21 @@ return
                     --capabilities = capabilities
                 }
                 require('lspconfig').rust_analyzer.setup {
-                    -- Other Configs ...
-                    --on_attach = require("plugins.configs.lspconfig").on_attach,
                     capabilities = capabilities,
-                    --filetypes = {"rust"},
                     root_dir = require("lspconfig/util").root_pattern("Cargo.toml"),
 
                     settings = {
                         ["rust-analyzer"] = {
                             -- Other Settings ...
                             cargo = { allFeatures = true,},
+                            checkOnSave = true,
                             procMacro = {
-                                ignored = {
-                                    leptos_macro = {
-                                        -- optional: --
-                                        -- "component",
-                                        --"server",
-                                    },
-                                },
-                            },
-                            --    inlayHints = 
-                            --        { enable = true, typeHints = true, parameterHints = true, 
-                            --            chainingHints = true,closureReturnTypeHints = { enable = true }, 
-                            --            closureCaptureHints = { enable = true }, },
-                            --},
+                                    ignored = {
+                                        leptos_macro = {
+                                            --"server",
+                                            --"component",
+                                        }
+                                    }}
                     }},
                 }
                 -- Enable inlay hints globally for LSP
@@ -64,7 +55,7 @@ return
                 })
                 
                 vim.diagnostic.config({
-                    virtual_text = false,
+                    virtual_text = true,
                     signs = false,
                     underline = true,
                     severity_sort = true,
@@ -76,6 +67,13 @@ return
                         severity_sort = true,
                     }
                 })
+                
+                vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = true, sp = "Red" })
+                vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn",  { undercurl = true, sp = "Yellow" })
+                vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo",  { undercurl = true, sp = "Blue" })
+                vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint",  { undercurl = true, sp = "Green" })
+
+                vim.api.nvim_create_autocmd("ColorScheme", {callback = function() vim.diagnostic.config({ underline = true }) end,})
 
                 vim.o.updatetime = 250
                 vim.api.nvim_create_autocmd("CursorHold", {
@@ -91,7 +89,7 @@ return
                     end,
                 })
 
-                --vim.diagnostic.config({virtual_text = true, signs = false, underline = true, severity_sort = true, update_in_insert = true})
+                vim.diagnostic.config({virtual_text = true, signs = false, underline = true, severity_sort = true, update_in_insert = true})
             end,
 
     }
